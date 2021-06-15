@@ -1,28 +1,30 @@
 var createError = require("http-errors");
 var express = require("express");
+
+let mongoose = require("mongoose");
+let mongoDB =
+  "mongodb+srv://tamburrisam:geotracker4ever@cluster0.ki4hp.mongodb.net/cluster0?retryWrites=true&w=majority";
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+let db = mongoose.connection;
+db.on("error", console.error.bind(console, "MongoDB connection error"));
+
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-let mongoose = require("mongoose");
-//Set up default mongoose connection
-var mongoDB = "mongodb://127.0.0.1/my_database";
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
-
-//Get the default connection
-var db = mongoose.connection;
-
-//Bind connection to error event (to get notification of connection errors)
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
+//mongo string
+//mongodb+srv://tamburrisam:geotracker4ever@cluster0.ki4hp.mongodb.net/local_library?retryWrites=true&w=majority
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+let catalogRouter = require("./routes/catalog");
 
 var app = express();
 
 // view engine setup
+
 app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "hbs");
+app.set("view engine", "pug");
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -34,6 +36,7 @@ app.use(express.static(path.join(__dirname, "public")));
 //so it would be /users/butt <-- in the users directory
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/catalog", catalogRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
