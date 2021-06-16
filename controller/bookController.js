@@ -4,6 +4,7 @@ let Genre = require("../models/genre");
 let BookInstance = require("../models/bookinstance");
 let async = require("async");
 
+//this is in VIEWS index
 exports.index = function (req, res) {
   async.parallel(
     {
@@ -34,6 +35,7 @@ exports.index = function (req, res) {
 };
 
 // Display list of all books.
+//this is in VIEWS book list
 exports.book_list = function (req, res, next) {
   Book.find({}, "title author")
     .populate("author")
