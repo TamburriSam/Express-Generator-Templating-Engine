@@ -1,5 +1,5 @@
 let express = require("express");
-let router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 let book_controller = require("../controller/bookController");
 let author_controller = require("../controller/authorController");
