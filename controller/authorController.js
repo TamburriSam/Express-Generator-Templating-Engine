@@ -1,3 +1,4 @@
+const { body, validationResult } = require("express-validator");
 var async = require("async");
 var Book = require("../models/book");
 let Author = require("../models/author");
@@ -50,8 +51,8 @@ exports.author_detail = function (req, res, next) {
 };
 
 //display author create form on GET
-exports.author_create_get = function (req, res) {
-  res.send("NOT IMPLEMENTED: Author create GET");
+exports.author_create_get = function (req, res, next) {
+  res.render("author_form", { title: "Create Author" });
 };
 
 //handle author create on post
