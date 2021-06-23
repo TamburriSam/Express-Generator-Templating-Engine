@@ -2,6 +2,8 @@ extends layout
 
 block content
   h1 Title: #{book.title}
+      a(href=book.url+'/delete') Delete Book
+
 
   p #[strong Author:]
     a(href=book.author.url) #{book.author.name}
@@ -15,6 +17,7 @@ block content
 
   div(style='margin-left:20px;margin-top:20px')
     h4 Copies
+    
 
     each val in book_instances
       hr
