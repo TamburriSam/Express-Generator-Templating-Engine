@@ -136,6 +136,7 @@ exports.book_create_post = [
     .isLength({ min: 1 })
     .escape(),
   body("isbn", "ISBN must not be empty").trim().isLength({ min: 1 }).escape(),
+  //sanitize every item below key genre
   body("genre.*").escape(),
 
   // Process request after validation and sanitization.
@@ -172,6 +173,7 @@ exports.book_create_post = [
 
           // Mark our selected genres as checked.
           for (let i = 0; i < results.genres.length; i++) {
+            //if its found then true
             if (book.genre.indexOf(results.genres[i]._id) > -1) {
               results.genres[i].checked = "true";
             }
