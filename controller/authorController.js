@@ -134,6 +134,7 @@ exports.author_delete_get = function (req, res, next) {
         // No results.
         res.redirect("/catalog/authors");
       }
+      console.log(results);
       // Successful, so render.
       res.render("author_delete", {
         title: "Delete Author",

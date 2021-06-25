@@ -3,6 +3,8 @@ extends layout
 block content
 
   h1 ID: #{bookinstance._id}
+      a(href=bookinstance.url+'/delete') Delete Instance
+
 
   p #[strong Title:]
     a(href=bookinstance.book.url) #{bookinstance.book.title}
