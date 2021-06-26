@@ -191,6 +191,7 @@ exports.author_update_get = function (req, res, next) {
         Author.findById(req.params.id).exec(callback);
       },
     },
+    //this catches it. if statement before the thing you want to happen by default
     function (err, results) {
       if (err) {
         return next(err);
